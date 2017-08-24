@@ -12,5 +12,10 @@ public class Shaman extends AbstractCard {
 			card.receiveShamanAttack(this);
 		}		
 	}
+	
+	@Override
+	public void receiveHunterAttack(Hunter hunter) {
+		receiveAttack(2 * hunter.getAttackPoints());
+	}
 
 }

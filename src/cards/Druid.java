@@ -12,5 +12,19 @@ public class Druid extends AbstractCard {
 			card.receiveDruidAttack(this);
 		}		
 	}
+	
+	@Override
+	public void receivePaladinAttack(Paladin paladin) {
+		if (isAlive()) {
+			raiseAttack(2 * paladin.getAttackPoints() / 3);
+			heal(2 * paladin.getAttackPoints() / 3);
+		}
+	}
+	
+	@Override
+	public void receiveShamanAttack(Shaman shaman) {
+		reduceAttack(2 * shaman.getAttackPoints() / 3);
+		receiveAttack(2 * shaman.getAttackPoints() / 3);
+	}
 
 }

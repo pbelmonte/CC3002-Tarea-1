@@ -12,5 +12,15 @@ public class Hunter extends AbstractCard {
 			card.receiveHunterAttack(this);		
 		}
 	}
+	
+	@Override
+	public void receiveDruidAttack(Druid druid) {
+		receiveAttack(druid.getAttackPoints() / 2);
+	}
+	
+	@Override
+	public void receiveMageAttack(Mage mage) {
+		receiveAttack(2 * mage.getAttackPoints());
+	}
 
 }

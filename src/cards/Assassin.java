@@ -13,4 +13,14 @@ public class Assassin extends AbstractCard {
 		}
 	}
 	
+	@Override
+	public void receiveWarlockAttack(Warlock warlock) {
+		receiveAttack(warlock.getAttackPoints() * 2);
+	}
+	
+	@Override
+	public void receiveDruidAttack(Druid druid) {
+		raiseAttack(druid.getAttackPoints() / 2);
+	}
+	
 }

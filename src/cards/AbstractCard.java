@@ -36,46 +36,63 @@ public abstract class AbstractCard implements ICard {
 	
 	public abstract void attack(ICard card);
 	
+	public void receiveAttack(int points) {
+		damage += points;
+	}
+	
+	public void heal(int points) {
+		damage -= points;
+	}
+	
+	public void raiseAttack(int points) {
+		attackPoints += points;
+	}
+	
+	public void reduceAttack(int points) {
+		attackPoints -= points;
+	}
+	
 	public void receiveAssassinAttack(Assassin assassin) {
-		damage += assassin.getAttackPoints();
+		receiveAttack(assassin.getAttackPoints());
 	}
 	
 	public void receiveWarlockAttack(Warlock warlock) {
-		damage += warlock.getAttackPoints();
+		receiveAttack(warlock.getAttackPoints());
 	}
+	
 	public void receiveKnightAttack(Knight knight) {
-		damage += knight.getAttackPoints();
+		receiveAttack(knight.getAttackPoints());
 	}
 	
 	public void receiveMageAttack(Mage mage) {
-		damage += mage.getAttackPoints();
+		receiveAttack(mage.getAttackPoints());
 	}
 	
 	public void receiveHunterAttack(Hunter hunter) {
-		damage += hunter.getAttackPoints();
+		receiveAttack(hunter.getAttackPoints());
 	}
 	
 	public void receiveHealerAttack(Healer healer) {
 		if (isAlive()) {
-			damage -= healer.getAttackPoints() / 2;
+			heal(healer.getAttackPoints() / 2);
 		}
 	}
 	
 	public void receiveDruidAttack(Druid druid) {
-		attackPoints += druid.getAttackPoints();
-		damage += druid.getAttackPoints() / 2;
+		raiseAttack(druid.getAttackPoints());
+		receiveAttack(druid.getAttackPoints() / 2);
 	}
 	
 	public void receivePaladinAttack(Paladin paladin) {
-		attackPoints += paladin.getAttackPoints() / 3;
 		if (isAlive()) {
-			damage -= paladin.getAttackPoints() / 3;
+			raiseAttack(paladin.getAttackPoints() / 3);
+			heal(paladin.getAttackPoints() / 3);
 		}
 	}
 	
 	public void receiveShamanAttack(Shaman shaman) {
-		attackPoints -= shaman.getAttackPoints() / 3;
-		damage += shaman.getAttackPoints() / 3;
+		reduceAttack(shaman.getAttackPoints() / 3);
+		receiveAttack(shaman.getAttackPoints() / 3);
 	}
 	
 }

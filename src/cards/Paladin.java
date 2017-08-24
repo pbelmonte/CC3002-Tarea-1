@@ -12,5 +12,15 @@ public class Paladin extends AbstractCard {
 			card.receivePaladinAttack(this);
 		}
 	}
+	
+	@Override
+	public void receiveKnightAttack(Knight knight) {
+		receiveAttack(knight.getAttackPoints() / 2);
+	}
+	
+	@Override
+	public void receiveMageAttack(Mage mage) {
+		receiveAttack(2 * mage.getAttackPoints());
+	}
 
 }

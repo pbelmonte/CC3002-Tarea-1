@@ -12,5 +12,15 @@ public class Mage extends AbstractCard {
 			card.receiveMageAttack(this);		
 		}
 	}
+	
+	@Override
+	public void receiveAssassinAttack(Assassin assassin) {
+		receiveAttack(2 * assassin.getAttackPoints());
+	}
+	
+	@Override
+	public void receiveWarlockAttack(Warlock warlock) {
+		receiveAttack(warlock.getAttackPoints() / 2);
+	}
 
 }

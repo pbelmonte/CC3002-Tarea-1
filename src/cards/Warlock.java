@@ -12,5 +12,16 @@ public class Warlock extends AbstractCard {
 			card.receiveWarlockAttack(this);
 		}
 	}
+	
+	@Override
+	public void receiveHealerAttack(Healer healer) {
+		receiveAttack(healer.getAttackPoints());
+	}
+	
+	@Override
+	public void receiveShamanAttack(Shaman shaman) {
+		reduceAttack(2 * shaman.getAttackPoints() / 3);
+		receiveAttack(2 * shaman.getAttackPoints() / 3);
+	}
 
 }

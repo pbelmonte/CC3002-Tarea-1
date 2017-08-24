@@ -12,5 +12,15 @@ public class Knight extends AbstractCard {
 			card.receiveKnightAttack(this);
 		}
 	}
+	
+	@Override
+	public void receiveHunterAttack(Hunter hunter) {
+		receiveAttack(2 * hunter.getAttackPoints());
+	}
+	
+	@Override
+	public void receiveAssassinAttack(Assassin assassin) {
+		receiveAttack(assassin.getAttackPoints() / 2);
+	}
 
 }
