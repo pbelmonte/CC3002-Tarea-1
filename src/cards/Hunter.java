@@ -8,7 +8,7 @@ public class Hunter extends AbstractCard {
 
 	@Override
 	public void attack(ICard card) {
-		if (isAlive()) {
+		if (isAlive() && !card.equals(this)) {
 			card.receiveHunterAttack(this);		
 		}
 	}
