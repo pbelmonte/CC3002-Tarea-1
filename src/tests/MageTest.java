@@ -15,13 +15,13 @@ import cards.Paladin;
 import cards.Shaman;
 import cards.Warlock;
 
-public class KnightTest {
+public class MageTest {
 
   private Assassin assassin;
   private Warlock warlock;
   private Knight knight;
-  private Knight knight2;
   private Mage mage;
+  private Mage mage2;
   private Hunter hunter;
   private Healer healer;
   private Druid druid;
@@ -33,8 +33,8 @@ public class KnightTest {
     assassin = new Assassin("Assassin", 20, 0, 12);
     warlock = new Warlock("Warlock", 22, 0, 10);
     knight = new Knight("Knight", 25, 0, 9);
-    knight2 = new Knight("Knight2", 20, 0, 8);
     mage = new Mage("Mage", 14, 0, 13);
+    mage2 = new Mage("Mage2", 14, 0, 10);
     hunter = new Hunter("Hunter", 19, 0, 10);
     healer = new Healer("Healer", 23, 0, 14);
     druid = new Druid("Druid", 17, 0, 9);
@@ -44,116 +44,116 @@ public class KnightTest {
 
   @Test
   public void testNormalAttack() {
-    knight.attack(druid);
-    assertEquals("Deberia ser 9", 9, druid.getDamage());
+    mage.attack(druid);
+    assertEquals("Deberia ser 13", 13, druid.getDamage());
   }
 
   @Test
   public void testSelfAttack() {
-    knight.attack(knight);
-    assertEquals("Deberia ser 0", 0, knight.getDamage());
+    mage.attack(mage);
+    assertEquals("Deberia ser 0", 0, mage.getDamage());
   }
 
   @Test
   public void testDeadAttack() {
-    knight.receiveHunterAttack(hunter);
-    knight.receiveWarlockAttack(warlock);
-    knight.attack(druid);
+    mage.receiveHunterAttack(hunter);
+    mage.receiveWarlockAttack(warlock);
+    mage.attack(druid);
     assertEquals("Deberia ser 0", 0, druid.getDamage());
   }
 
   @Test
   public void testReceiveAssassinAttack() {
-    knight.receiveAssassinAttack(assassin);
-    assertEquals("Deberia ser 6", 6, knight.getDamage());
+    mage.receiveAssassinAttack(assassin);
+    assertEquals("Deberia ser 24", 24, mage.getDamage());
   }
 
   @Test
   public void testReceiveWarlockAttack() {
-    knight.receiveWarlockAttack(warlock);
-    assertEquals("Deberia ser 10", 10, knight.getDamage());
+    mage.receiveWarlockAttack(warlock);
+    assertEquals("Deberia ser 5", 5, mage.getDamage());
   }
 
   @Test
   public void testReceiveKnightAttack() {
-    knight.receiveKnightAttack(knight2);
-    assertEquals("Deberia ser 8", 8, knight.getDamage());
+    mage.receiveKnightAttack(knight);
+    assertEquals("Deberia ser 9", 9, mage.getDamage());
   }
 
   @Test
   public void testReceiveMageAttack() {
-    knight.receiveMageAttack(mage);
-    assertEquals("Deberia ser 13", 13, knight.getDamage());
+    mage.receiveMageAttack(mage2);
+    assertEquals("Deberia ser 10", 10, mage.getDamage());
   }
 
   @Test
   public void testReceiveHunterAttack() {
-    knight.receiveHunterAttack(hunter);
-    assertEquals("Deberia ser 20", 20, knight.getDamage());
+    mage.receiveHunterAttack(hunter);
+    assertEquals("Deberia ser 10", 10, mage.getDamage());
   }
 
   @Test
   public void testReceiveNormalHealerAttack() {
-    knight.receiveMageAttack(mage);
-    knight.receiveHealerAttack(healer);
-    assertEquals("Deberia ser 6", 6, knight.getDamage());
+    mage.receiveKnightAttack(knight);
+    mage.receiveHealerAttack(healer);
+    assertEquals("Deberia ser 2", 2, mage.getDamage());
   }
 
   @Test
   public void testReceiveCeroDamageHealerAttack() {
-    knight.receiveHealerAttack(healer);
-    assertEquals("Deberia ser 0", 0, knight.getDamage());
+    mage.receiveHealerAttack(healer);
+    assertEquals("Deberia ser 0", 0, mage.getDamage());
   }
 
   @Test
   public void testReceiveDeadHealerAttack() {
-    knight.receiveHunterAttack(hunter);
-    knight.receiveHunterAttack(hunter);
-    knight.receiveHealerAttack(healer);
-    assertFalse("Deberia estar muerto", knight.isAlive());
+    mage.receiveHunterAttack(hunter);
+    mage.receiveHunterAttack(hunter);
+    mage.receiveHealerAttack(healer);
+    assertFalse("Deberia estar muerto", mage.isAlive());
   }
 
   @Test
   public void testReceiveAttackPointsDruidAttack() {
-    knight.receiveDruidAttack(druid);
-    assertEquals("Deberia ser 18", 18, knight.getAttackPoints());
+    mage.receiveDruidAttack(druid);
+    assertEquals("Deberia ser 22", 22, mage.getAttackPoints());
   }
 
   @Test
   public void testReceiveDamageDruidAttack() {
-    knight.receiveDruidAttack(druid);
-    assertEquals("Deberia ser 4", 4, knight.getDamage());
+    mage.receiveDruidAttack(druid);
+    assertEquals("Deberia ser 4", 4, mage.getDamage());
   }
 
   @Test
   public void testReceiveAttackPointsPaladinAttack() {
-    knight.receivePaladinAttack(paladin);
-    assertEquals("Deberia ser 13", 13, knight.getAttackPoints());
+    mage.receivePaladinAttack(paladin);
+    assertEquals("Deberia ser 17", 17, mage.getAttackPoints());
   }
 
   @Test
   public void testReceiveCeroDamagePaladinAttack() {
-    knight.receivePaladinAttack(paladin);
-    assertEquals("Deberia ser 0", 0, knight.getDamage());
+    mage.receivePaladinAttack(paladin);
+    assertEquals("Deberia ser 0", 0, mage.getDamage());
   }
 
   @Test
   public void testReceiveDamagePaladinAttack() {
-    knight.receiveHunterAttack(hunter);
-    knight.receivePaladinAttack(paladin);
-    assertEquals("Deberia ser 16", 16, knight.getDamage());
+    mage.receiveHunterAttack(hunter);
+    mage.receivePaladinAttack(paladin);
+    assertEquals("Deberia ser 6", 6, mage.getDamage());
   }
-  
+
   @Test
   public void testReceiveAttackPointsShamanAttack() {
-    knight.receiveShamanAttack(shaman);
-    assertEquals("Deberia ser 6", 6, knight.getAttackPoints());
+    mage.receiveShamanAttack(shaman);
+    assertEquals("Deberia ser 10", 10, mage.getAttackPoints());
   }
 
   @Test
   public void testReceiveDamageShamanAttack() {
-    knight.receiveShamanAttack(shaman);
-    assertEquals("Deberia ser 3", 3, knight.getDamage());
+    mage.receiveShamanAttack(shaman);
+    assertEquals("Deberia ser 3", 3, mage.getDamage());
   }
 
 }

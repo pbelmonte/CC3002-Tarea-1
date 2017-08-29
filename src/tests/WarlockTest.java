@@ -41,21 +41,25 @@ public class WarlockTest {
     paladin = new Paladin("Paladin", 25, 0, 13);
     shaman = new Shaman("Shaman", 16, 0, 10);
   }
+  
+  @Test
+  public void testNormalAttack() {
+    warlock.attack(druid);
+    assertEquals("Deberia ser 10", 10, druid.getDamage());
+  }
 
   @Test
-  public void testAttack() {
-    warlock.attack(druid);
-    assertEquals("Deberia ser 10", 10, druid.getDamage());
-
-    // No se puede atacar a si mismo
+  public void testSelfAttack() {
     warlock.attack(warlock);
     assertEquals("Deberia ser 0", 0, warlock.getDamage());
+  }
 
-    // Si esta muerto no puede atacar
+  @Test
+  public void testDeadAttack() {
     warlock.receiveAssassinAttack(assassin);
     warlock.receiveAssassinAttack(assassin);
     warlock.attack(druid);
-    assertEquals("Deberia ser 10", 10, druid.getDamage());
+    assertEquals("Deberia ser 0", 0, druid.getDamage());
   }
 
   @Test
@@ -93,27 +97,46 @@ public class WarlockTest {
     warlock.receiveHealerAttack(healer);
     assertEquals("Deberia ser 14", 14, warlock.getDamage());
   }
-
+  
   @Test
-  public void testReceiveDruidAttack() {
+  public void testReceiveAttackPointsDruidAttack() {
     warlock.receiveDruidAttack(druid);
     assertEquals("Deberia ser 19", 19, warlock.getAttackPoints());
-    assertEquals("Deberia ser 4", 4, warlock.getDamage());
   }
 
   @Test
-  public void testReceivePaladinAttack() {
+  public void testReceiveDamageDruidAttack() {
+    warlock.receiveDruidAttack(druid);
+    assertEquals("Deberia ser 4", 4, warlock.getDamage());
+  }
+  
+  @Test
+  public void testReceiveAttackPointsPaladinAttack() {
+    warlock.receivePaladinAttack(paladin);
+    assertEquals("Deberia ser 14", 14, warlock.getAttackPoints());
+  }
+
+  @Test
+  public void testReceiveCeroDamagePaladinAttack() {
     warlock.receivePaladinAttack(paladin);
     assertEquals("Deberia ser 0", 0, warlock.getDamage());
-    assertEquals("Deberia ser 14", 14, warlock.getAttackPoints());
+  }
+
+  @Test
+  public void testReceiveDamagePaladinAttack() {
     warlock.receiveHunterAttack(hunter);
     warlock.receivePaladinAttack(paladin);
     assertEquals("Deberia ser 6", 6, warlock.getDamage());
-    assertEquals("Deberia ser 18", 18, warlock.getAttackPoints());
+  }
+  
+  @Test
+  public void testReceiveAttackPointsShamanAttack() {
+    warlock.receiveShamanAttack(shaman);
+    assertEquals("Deberia ser 4", 4, warlock.getAttackPoints());
   }
 
   @Test
-  public void testReceiveShamanAttack() {
+  public void testReceiveDamageShamanAttack() {
     warlock.receiveShamanAttack(shaman);
     assertEquals("Deberia ser 4", 4, warlock.getAttackPoints());
     assertEquals("Deberia ser 6", 6, warlock.getDamage());

@@ -1,7 +1,7 @@
 package cards;
 
 /**
- * Representa una carta abstracta
+ * Represents an abstract card
  * 
  * @author Pedro Belmonte
  *
@@ -16,10 +16,10 @@ public abstract class AbstractCard implements ICard {
   /**
    * Constructor
    * 
-   * @param name Nombre de la carta
-   * @param life Vida total de la carta
-   * @param damage Contador de daño
-   * @param attackPoints Puntos de ataque o de accion
+   * @param name Name of the card
+   * @param life Total life
+   * @param damage Damage taken
+   * @param attackPoints Attack or action points
    */
   public AbstractCard(String name, int life, int damage, int attackPoints) {
     this.name = name;
@@ -29,118 +29,118 @@ public abstract class AbstractCard implements ICard {
   }
 
   /**
-   * Retorna true si la vida total es mayor que el daño
+   * Return true if total life is greater than damage
    */
   public boolean isAlive() {
     return life > damage;
   }
 
   /**
-   * Retorna el nombre de la carta
+   * Return the name of the card
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Retorna la vida total
+   * Return total life
    */
   public int getLife() {
     return life;
   }
 
   /**
-   * Retorna el daño
+   * Return damage
    */
   public int getDamage() {
     return damage;
   }
 
   /**
-   * Retorna los puntos de ataque
+   * Return the attack points
    */
   public int getAttackPoints() {
     return attackPoints;
   }
 
   /**
-   * Ataca a otra carta
+   * Attack another card
    */
   public abstract void attack(ICard card);
 
   /**
-   * Aumenta los puntos de daño
+   * Increase damage
    * 
-   * @param points Cantidad a aumentar
+   * @param points Amount to increase
    */
   void receiveAttack(int points) {
     damage += points;
   }
 
   /**
-   * Reduce el daño
+   * Decrease damage
    * 
-   * @param points Cantidad a reducir
+   * @param points Amount to decrease
    */
   void heal(int points) {
     damage = Math.max(0, damage - points);
   }
 
   /**
-   * Aumenta los puntos de ataque
+   * Increase attack points
    * 
-   * @param points Cantidad a aumentar
+   * @param points Amount to increase
    */
   void raiseAttack(int points) {
     attackPoints += points;
   }
 
   /**
-   * Reduce los puntos de ataque
+   * Decrease attack points
    * 
-   * @param points Cantidad a reducir
+   * @param points Amount to decrease
    */
   void reduceAttack(int points) {
     attackPoints -= points;
   }
 
   /**
-   * Recibe un ataque de una carta tipo Assassin
+   * Receive an attack from an Assassin type card
    */
   public void receiveAssassinAttack(Assassin assassin) {
     receiveAttack(assassin.getAttackPoints());
   }
 
   /**
-   * Recibe un ataque de una carta tipo Warlock
+   * Receive an attack from a Warlock type card
    */
   public void receiveWarlockAttack(Warlock warlock) {
     receiveAttack(warlock.getAttackPoints());
   }
 
   /**
-   * Recibe un ataque de una carta tipo Knight
+   * Receive an attack from a Knight type card
    */
   public void receiveKnightAttack(Knight knight) {
     receiveAttack(knight.getAttackPoints());
   }
 
   /**
-   * Recibe un ataque de una carta tipo Mage
+   * Receive an attack from a Mage type card
    */
   public void receiveMageAttack(Mage mage) {
     receiveAttack(mage.getAttackPoints());
   }
 
   /**
-   * Recibe un ataque de una carta tipo Hunter
+   * Receive an attack from a Hunter type card
    */
   public void receiveHunterAttack(Hunter hunter) {
     receiveAttack(hunter.getAttackPoints());
   }
 
   /**
-   * Recibe un ataque de una carta tipo Healer
+   * Receive an attack from a Healer type card
    */
   public void receiveHealerAttack(Healer healer) {
     if (isAlive()) {
@@ -149,7 +149,7 @@ public abstract class AbstractCard implements ICard {
   }
 
   /**
-   * Recibe un ataque de una carta tipo Druid
+   * Receive an attack from a Druid type card
    */
   public void receiveDruidAttack(Druid druid) {
     raiseAttack(druid.getAttackPoints());
@@ -157,7 +157,7 @@ public abstract class AbstractCard implements ICard {
   }
 
   /**
-   * Recibe un ataque de una carta tipo Paladin
+   * Receive an attack from a Paladin type card
    */
   public void receivePaladinAttack(Paladin paladin) {
     if (isAlive()) {
@@ -167,7 +167,7 @@ public abstract class AbstractCard implements ICard {
   }
 
   /**
-   * Recibe un ataque de una carta tipo Shaman
+   * Receive an attack from a Shaman type card
    */
   public void receiveShamanAttack(Shaman shaman) {
     reduceAttack(shaman.getAttackPoints() / 3);

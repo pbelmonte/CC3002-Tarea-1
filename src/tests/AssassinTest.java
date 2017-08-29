@@ -43,19 +43,23 @@ public class AssassinTest {
   }
 
   @Test
-  public void testAttack() {
+  public void testNormalAttack() {
     assassin.attack(druid);
     assertEquals("Deberia ser 12", 12, druid.getDamage());
+  }
 
-    // No se puede atacar a si mismo
+  @Test
+  public void testSelfAttack() {
     assassin.attack(assassin);
     assertEquals("Deberia ser 0", 0, assassin.getDamage());
+  }
 
-    // Si esta muerto no puede atacar
+  @Test
+  public void testDeadAttack() {
     assassin.receiveHunterAttack(hunter);
     assassin.receiveHunterAttack(hunter);
     assassin.attack(druid);
-    assertEquals("Deberia ser 12", 12, druid.getDamage());
+    assertEquals("Deberia ser 0", 0, druid.getDamage());
   }
 
   @Test
@@ -89,21 +93,20 @@ public class AssassinTest {
   }
 
   @Test
-  public void testReceiveHealerAttack() {
-    // Si el daño es 0 no puede volverse negativo
-    assassin.receiveHealerAttack(healer);
-    assertEquals("Deberia ser 0", 0, assassin.getDamage());
-
-    // Se cura normalmente
+  public void testReceiveNormalHealerAttack() {
     assassin.receiveHunterAttack(hunter);
     assassin.receiveHealerAttack(healer);
     assertEquals("Deberia ser 3", 3, assassin.getDamage());
+  }
 
-    // Se cura solo lo necesario (nuevamente no puede tener dano negativo)
+  @Test
+  public void testReceiveCeroDamageHealerAttack() {
     assassin.receiveHealerAttack(healer);
     assertEquals("Deberia ser 0", 0, assassin.getDamage());
+  }
 
-    // Si esta muerto no resucita
+  @Test
+  public void testReceiveDeadHealerAttack() {
     assassin.receiveHunterAttack(hunter);
     assassin.receiveHunterAttack(hunter);
     assassin.receiveHealerAttack(healer);
@@ -111,27 +114,45 @@ public class AssassinTest {
   }
 
   @Test
-  public void testReceiveDruidAttack() {
+  public void testReceiveAttackPointsDruidAttack() {
     assassin.receiveDruidAttack(druid);
     assertEquals("Deberia ser 16", 16, assassin.getAttackPoints());
+  }
+
+  @Test
+  public void testReceiveDamageDruidAttack() {
+    assassin.receiveDruidAttack(druid);
     assertEquals("Deberia ser 0", 0, assassin.getDamage());
   }
 
   @Test
-  public void testReceivePaladinAttack() {
+  public void testReceiveAttackPointsPaladinAttack() {
+    assassin.receivePaladinAttack(paladin);
+    assertEquals("Deberia ser 16", 16, assassin.getAttackPoints());
+  }
+
+  @Test
+  public void testReceiveCeroDamagePaladinAttack() {
     assassin.receivePaladinAttack(paladin);
     assertEquals("Deberia ser 0", 0, assassin.getDamage());
-    assertEquals("Deberia ser 16", 16, assassin.getAttackPoints());
+  }
+
+  @Test
+  public void testReceiveDamagePaladinAttack() {
     assassin.receiveHunterAttack(hunter);
     assassin.receivePaladinAttack(paladin);
     assertEquals("Deberia ser 6", 6, assassin.getDamage());
-    assertEquals("Deberia ser 20", 20, assassin.getAttackPoints());
   }
 
   @Test
-  public void testReceiveShamanAttack() {
+  public void testReceiveAttackPointsShamanAttack() {
     assassin.receiveShamanAttack(shaman);
     assertEquals("Deberia ser 9", 9, assassin.getAttackPoints());
+  }
+
+  @Test
+  public void testReceiveDamageShamanAttack() {
+    assassin.receiveShamanAttack(shaman);
     assertEquals("Deberia ser 3", 3, assassin.getDamage());
   }
 

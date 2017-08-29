@@ -1,14 +1,20 @@
 package cards;
 
+/**
+ * Represents a Druid card
+ * 
+ * @author Pedro Belmonte
+ *
+ */
 public class Druid extends AbstractCard {
 
   /**
    * Constructor
    * 
-   * @param name Nombre de la carta
-   * @param life Vida total de la carta
-   * @param damage Contador de daño
-   * @param attackPoints Puntos de ataque o de accion
+   * @param name Name of the card
+   * @param life Total life
+   * @param damage Damage taken
+   * @param attackPoints Attack or action points
    */
   public Druid(String name, int life, int damage, int attackPoints) {
     super(name, life, damage, attackPoints);

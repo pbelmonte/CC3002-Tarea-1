@@ -1,14 +1,20 @@
 package cards;
 
+/**
+ * Represents a Shaman card
+ * 
+ * @author Pedro Belmonte
+ *
+ */
 public class Shaman extends AbstractCard {
 
   /**
    * Constructor
    * 
-   * @param name Nombre de la carta
-   * @param life Vida total de la carta
-   * @param damage Contador de daño
-   * @param attackPoints Puntos de ataque o de accion
+   * @param name Name of the card
+   * @param life Total life
+   * @param damage Damage taken
+   * @param attackPoints Attack or action points
    */
   public Shaman(String name, int life, int damage, int attackPoints) {
     super(name, life, damage, attackPoints);
