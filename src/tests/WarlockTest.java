@@ -41,7 +41,7 @@ public class WarlockTest {
     paladin = new Paladin("Paladin", 25, 0, 13);
     shaman = new Shaman("Shaman", 16, 0, 10);
   }
-  
+
   @Test
   public void testNormalAttack() {
     warlock.attack(druid);
@@ -97,7 +97,7 @@ public class WarlockTest {
     warlock.receiveHealerAttack(healer);
     assertEquals("Deberia ser 14", 14, warlock.getDamage());
   }
-  
+
   @Test
   public void testReceiveAttackPointsDruidAttack() {
     warlock.receiveDruidAttack(druid);
@@ -109,7 +109,7 @@ public class WarlockTest {
     warlock.receiveDruidAttack(druid);
     assertEquals("Deberia ser 4", 4, warlock.getDamage());
   }
-  
+
   @Test
   public void testReceiveAttackPointsPaladinAttack() {
     warlock.receivePaladinAttack(paladin);
@@ -128,7 +128,15 @@ public class WarlockTest {
     warlock.receivePaladinAttack(paladin);
     assertEquals("Deberia ser 6", 6, warlock.getDamage());
   }
-  
+
+  @Test
+  public void testReceiveDeadPaladinAttack() {
+    warlock.receiveAssassinAttack(assassin);
+    warlock.receiveAssassinAttack(assassin);
+    warlock.receivePaladinAttack(paladin);
+    assertFalse("Deberia estar muerto", warlock.isAlive());
+  }
+
   @Test
   public void testReceiveAttackPointsShamanAttack() {
     warlock.receiveShamanAttack(shaman);

@@ -65,7 +65,7 @@ public class HunterTest {
   @Test
   public void testReceiveAssassinAttack() {
     hunter.receiveAssassinAttack(assassin);
-    assertEquals("Deberia ser 6", 6, hunter.getDamage());
+    assertEquals("Deberia ser 12", 12, hunter.getDamage());
   }
 
   @Test
@@ -77,26 +77,26 @@ public class HunterTest {
   @Test
   public void testReceiveKnightAttack() {
     hunter.receiveKnightAttack(knight);
-    assertEquals("Deberia ser 8", 8, hunter.getDamage());
+    assertEquals("Deberia ser 9", 9, hunter.getDamage());
   }
 
   @Test
   public void testReceiveMageAttack() {
     hunter.receiveMageAttack(mage);
-    assertEquals("Deberia ser 13", 13, hunter.getDamage());
+    assertEquals("Deberia ser 26", 26, hunter.getDamage());
   }
 
   @Test
   public void testReceiveHunterAttack() {
     hunter.receiveHunterAttack(hunter2);
-    assertEquals("Deberia ser 20", 20, hunter.getDamage());
+    assertEquals("Deberia ser 8", 8, hunter.getDamage());
   }
 
   @Test
   public void testReceiveNormalHealerAttack() {
-    hunter.receiveMageAttack(mage);
+    hunter.receiveKnightAttack(knight);
     hunter.receiveHealerAttack(healer);
-    assertEquals("Deberia ser 6", 6, hunter.getDamage());
+    assertEquals("Deberia ser 2", 2, hunter.getDamage());
   }
 
   @Test
@@ -107,8 +107,8 @@ public class HunterTest {
 
   @Test
   public void testReceiveDeadHealerAttack() {
-    hunter.receiveHunterAttack(hunter);
-    hunter.receiveHunterAttack(hunter);
+    hunter.receiveWarlockAttack(warlock);
+    hunter.receiveKnightAttack(knight);
     hunter.receiveHealerAttack(healer);
     assertFalse("Deberia estar muerto", hunter.isAlive());
   }
@@ -116,7 +116,7 @@ public class HunterTest {
   @Test
   public void testReceiveAttackPointsDruidAttack() {
     hunter.receiveDruidAttack(druid);
-    assertEquals("Deberia ser 18", 18, hunter.getAttackPoints());
+    assertEquals("Deberia ser 10", 10, hunter.getAttackPoints());
   }
 
   @Test
@@ -128,7 +128,7 @@ public class HunterTest {
   @Test
   public void testReceiveAttackPointsPaladinAttack() {
     hunter.receivePaladinAttack(paladin);
-    assertEquals("Deberia ser 13", 13, hunter.getAttackPoints());
+    assertEquals("Deberia ser 14", 14, hunter.getAttackPoints());
   }
 
   @Test
@@ -139,15 +139,23 @@ public class HunterTest {
 
   @Test
   public void testReceiveDamagePaladinAttack() {
-    hunter.receiveHunterAttack(hunter);
+    hunter.receiveAssassinAttack(assassin);
     hunter.receivePaladinAttack(paladin);
-    assertEquals("Deberia ser 16", 16, hunter.getDamage());
+    assertEquals("Deberia ser 8", 8, hunter.getDamage());
+  }
+
+  @Test
+  public void testReceiveDeadPaladinAttack() {
+    hunter.receiveWarlockAttack(warlock);
+    hunter.receiveWarlockAttack(warlock);
+    hunter.receivePaladinAttack(paladin);
+    assertFalse("Deberia estar muerto", hunter.isAlive());
   }
 
   @Test
   public void testReceiveAttackPointsShamanAttack() {
     hunter.receiveShamanAttack(shaman);
-    assertEquals("Deberia ser 6", 6, hunter.getAttackPoints());
+    assertEquals("Deberia ser 7", 7, hunter.getAttackPoints());
   }
 
   @Test

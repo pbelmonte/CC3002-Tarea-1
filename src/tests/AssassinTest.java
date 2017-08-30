@@ -145,6 +145,14 @@ public class AssassinTest {
   }
 
   @Test
+  public void testReceiveDeadPaladinAttack() {
+    assassin.receiveHunterAttack(hunter);
+    assassin.receiveHunterAttack(hunter);
+    assassin.receivePaladinAttack(paladin);
+    assertFalse("Deberia estar muerto", assassin.isAlive());
+  }
+
+  @Test
   public void testReceiveAttackPointsShamanAttack() {
     assassin.receiveShamanAttack(shaman);
     assertEquals("Deberia ser 9", 9, assassin.getAttackPoints());
