@@ -41,6 +41,16 @@ public class MageTest {
     paladin = new Paladin("Paladin", 25, 0, 13);
     shaman = new Shaman("Shaman", 16, 0, 10);
   }
+  
+  @Test
+  public void testGetName() {
+    assertEquals("Deberia ser Mage", "Mage", mage.getName());
+  }
+  
+  @Test
+  public void testGetLife() {
+    assertEquals("Deberia ser 14", 14, mage.getLife());
+  }
 
   @Test
   public void testNormalAttack() {

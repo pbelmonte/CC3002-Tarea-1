@@ -41,6 +41,16 @@ public class DruidTest {
     paladin = new Paladin("Paladin", 25, 0, 13);
     shaman = new Shaman("Shaman", 16, 0, 10);
   }
+  
+  @Test
+  public void testGetName() {
+    assertEquals("Deberia ser Druid", "Druid", druid.getName());
+  }
+  
+  @Test
+  public void testGetLife() {
+    assertEquals("Deberia ser 17", 17, druid.getLife());
+  }
 
   @Test
   public void testNormalAttackPointsAttack() {
